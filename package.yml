@@ -1,0 +1,20 @@
+package: community.lazycat.app.t3code
+version: 0.28.4
+name: T3 Code
+description: "T3 Code headless server：把编码 Agent（Claude Code、Codex 等）跑在服务器容器里，桌面/网页/手机端连接控制。内置 Setup 页面配对设备、登录 Agent、连接 AI 网关，首次启动自动安装 Agent CLI 与语言工具链。"
+min_os_version: 1.5.0
+homepage: https://github.com/dizys/t3code-docker
+author: dizys
+license: MIT
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: T3 Code
+    description: "编码 Agent 无头服务器：Agent 跑在容器里，桌面/网页/手机端连接控制。内置 Setup 页面配对设备与登录 Agent，首次启动自动安装 Agent CLI 与工具链。"
+  zh_CN:
+    name: T3 Code
+  en:
+    name: T3 Code
+    description: "Run T3 Code as a headless server in a container, with coding agents and language toolchains installed on first start."

@@ -1,0 +1,67 @@
+application:
+  subdomain: t3code
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://t3code:8080/
+      # WebSocket / 流式响应直通（单端口路由原生支持）
+      fix_websocket_header: true
+
+services:
+  t3code:
+    # upstream: docker.io/dizys/t3code-docker:0.28.4
+    image: docker.1ms.run/dizys/t3code-docker:0.28.4
+    environment:
+      - TZ=Asia/Shanghai
+      # 单端口模式：容器在 8080 同时服务 T3 Code(/) 与 Setup 页(/__setup)
+      - T3_SINGLE_PORT=8080
+      # Setup 页密钥：平台稳定密钥，重装不变；也可在 Setup 页内查看/更换
+      - T3_SETUP_KEY={{ stable_secret "t3code_setup_key" }}
+      - T3_SETUP_ENABLED=1
+      # 懒猫网关反代保留转发头，仅经网关访问
+      - T3_TRUST_PROXY_HEADERS=1
+      # 首次启动自动安装 5 个 Agent CLI + Go/Rust/Bun/Deno/uv 工具链（装到数据卷）
+      - T3_PREINSTALL=all
+      - T3_PERSIST_AGENT_CREDENTIALS=1
+      - T3_AUTO_ADD_PROJECTS=1
+      - T3_PRINT_PAIRING_ON_START=0
+      - T3_ALLOW_SUDO=0
+      - T3CODE_SERVER_BROWSER_SANDBOX=0
+      - PUID=1000
+      - PGID=1000
+    binds:
+      # 状态卷：登录凭据、已安装 Agent 与工具链（重建容器不丢）
+      - /lzcapp/var/home:/home/t3
+      # 可选服务软件与身份（Setup > Services 安装的内容）
+      - /lzcapp/var/services:/var/lib/t3code/services
+      # 工作区：每个 git checkout 一个项目
+      - /lzcapp/var/workspace:/workspace
+    shm_size: 1gb
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - curl -sf http://127.0.0.1:8080/ -o /dev/null || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+usage: |
+  T3 Code 是编码 Agent 的控制台：Agent（Claude Code、Codex、OpenCode 等）跑在
+  服务器容器里，桌面、网页和手机端连接上去控制它。
+
+  【首次使用】
+  1. 打开应用后进入 /__setup（Setup 页面），输入 Setup 密钥。
+     密钥可通过 SSH 到盒子执行「lzc-cli app status community.lazycat.app.t3code」
+     类工具查看应用环境变量 T3_SETUP_KEY 获得。
+  2. Overview 会引导完成剩余步骤：设置公网地址（填懒猫应用域名即可）、
+     用二维码配对手机/桌面设备、登录各 Agent 或接入自己的 AI 网关。
+  3. 首次启动会在后台安装 Agent CLI 与语言工具链（约几分钟），进度在 Setup 页可见。
+
+  【说明】
+  - 工作区在应用数据目录 /workspace 下，每个 git 仓库是一个项目，启动时自动注册。
+  - Agent 登录凭据与工具链装在数据卷（/home/t3），升级/重建容器不丢失。
+  - 上游 MIT 开源：https://github.com/dizys/t3code-docker
+  - 本应用为镜像模式打包，CI 跟随上游 release 自动更新。

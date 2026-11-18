@@ -1,0 +1,40 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/t3code.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  version_source:
+    type: image
+    image: t3code
+  sync_license: true
+
+build:
+  toolchains: []
+  run_buildscript: false
+
+images:
+  - id: t3code
+    target: service
+    service: t3code
+    source: docker.io/dizys/t3code-docker
+    channel: stable
+    sort: semver
+    tag_regex: '^\d+\.\d+\.\d+$'
+    delivery:
+      mode: mirror
+      require_digest_match: true
+
+stores:
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: T3 Code
+    summary: "T3 Code 懒猫微服打包：编码 Agent 无头服务器，桌面/网页/手机端连接控制，内置 Setup 页配对与登录（MIT）。"
+  official:
+    enabled: false
