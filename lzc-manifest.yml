@@ -8,10 +8,9 @@ application:
       backend: http://t3code:8080/
       # WebSocket / 流式响应直通（单端口路由原生支持）
       fix_websocket_header: true
-
 services:
   t3code:
-    # upstream: docker.io/dizys/t3code-docker:0.28.4（CI lazycat 模式复制到 registry.lazycat.cloud 后改写）
+    # upstream: docker.io/dizys/t3code-docker:0.28.4
     image: docker.1ms.run/dizys/t3code-docker:0.28.4
     environment:
       - TZ=Asia/Shanghai
@@ -47,7 +46,6 @@ services:
       timeout: 10s
       retries: 5
       start_period: 120s
-
 usage: |
   T3 Code 是编码 Agent 的控制台：Agent（Claude Code、Codex、OpenCode 等）跑在
   服务器容器里，桌面、网页和手机端连接上去控制它。
