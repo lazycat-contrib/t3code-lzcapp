@@ -27,7 +27,10 @@ images:
     sort: semver
     tag_regex: '^\d+\.\d+\.\d+$'
     delivery:
-      mode: lazycat
+      # mirror 模式无需平台凭据；官方商店要求 lazycat 模式（需 LZC_API_TOKEN），
+      # 待 LZC_API_TOKEN secret 配好后改为 mode: lazycat 并启用 official store 即可双商店发布
+      mode: mirror
+      require_digest_match: true
 
 stores:
   official:
