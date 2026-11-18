@@ -34,13 +34,23 @@ stores:
     enabled: true
     skip_if_version_exists: true
     continue_if_newer_version: false
-    screenshot_pc_files:
-      - screenshots/01-setup-overview.png
-      - screenshots/02-t3code-files.png
-      - screenshots/03-agent-signin.png
-      - screenshots/04-add-tool.png
-      - screenshots/05-ports-publish.png
-      - screenshots/06-setup-dark.png
+    create_if_missing: true
+    application:
+      language: zh
+      name: T3 Code
+      brief: "编码 Agent 无头服务器：Agent 跑在容器里，桌面/网页/手机端连接控制。"
+      description: "T3 Code 是编码 Agent 的控制台：Agent（Claude Code、Codex、OpenCode 等）跑在服务器容器里，桌面、网页和手机端连接上去控制它。内置 Setup 页面配对设备、登录 Agent、接入自有 AI 网关；首次启动自动安装 Agent CLI 与语言工具链。镜像来自 dizys/t3code-docker（MIT）。"
+      keywords: "agent,coding,claude,codex,terminal"
+      source: https://github.com/dizys/t3code-docker
+      source_author: dizys
+      support_pc: true
+      screenshot_pc_files:
+        - screenshots/01-setup-overview.png
+        - screenshots/02-t3code-files.png
+        - screenshots/03-agent-signin.png
+        - screenshots/04-add-tool.png
+        - screenshots/05-ports-publish.png
+        - screenshots/06-setup-dark.png
   private:
     enabled: true
     skip_if_version_exists: true
