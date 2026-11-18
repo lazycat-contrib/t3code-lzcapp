@@ -56,5 +56,3 @@ stores:
     skip_if_version_exists: true
     name: T3 Code
     summary: "T3 Code 懒猫微服打包：编码 Agent 无头服务器，桌面/网页/手机端连接控制，内置 Setup 页配对与登录（MIT）。"
-  official:
-    enabled: false
