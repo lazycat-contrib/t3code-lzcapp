@@ -11,7 +11,7 @@ application:
 
 services:
   t3code:
-    # upstream: docker.io/dizys/t3code-docker:0.28.4
+    # upstream: docker.io/dizys/t3code-docker:0.28.4（CI lazycat 模式复制到 registry.lazycat.cloud 后改写）
     image: docker.1ms.run/dizys/t3code-docker:0.28.4
     environment:
       - TZ=Asia/Shanghai

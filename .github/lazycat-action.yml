@@ -27,10 +27,20 @@ images:
     sort: semver
     tag_regex: '^\d+\.\d+\.\d+$'
     delivery:
-      mode: mirror
-      require_digest_match: true
+      mode: lazycat
 
 stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    continue_if_newer_version: false
+    screenshot_pc_files:
+      - screenshots/01-setup-overview.png
+      - screenshots/02-t3code-files.png
+      - screenshots/03-agent-signin.png
+      - screenshots/04-add-tool.png
+      - screenshots/05-ports-publish.png
+      - screenshots/06-setup-dark.png
   private:
     enabled: true
     skip_if_version_exists: true
