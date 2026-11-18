@@ -31,7 +31,7 @@ images:
 
 stores:
   official:
-    enabled: true
+    enabled: false  # TODO: flip to true after LZC_API_TOKEN (LazyCat developer PAT) secret is added
     skip_if_version_exists: true
     continue_if_newer_version: false
     create_if_missing: true
