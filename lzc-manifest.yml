@@ -10,8 +10,8 @@ application:
       fix_websocket_header: true
 services:
   t3code:
-    # upstream: docker.io/dizys/t3code-docker:0.28.8
-    image: docker.1ms.run/dizys/t3code-docker:0.28.8
+    # upstream: docker.io/dizys/t3code-docker:0.28.9
+    image: docker.1ms.run/dizys/t3code-docker:0.28.9
     environment:
       - TZ=Asia/Shanghai
       # 单端口模式：容器在 8080 同时服务 T3 Code(/) 与 Setup 页(/__setup)
