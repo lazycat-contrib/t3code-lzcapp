@@ -1,5 +1,5 @@
 package: community.lazycat.app.t3code
-version: 0.28.9
+version: 0.28.10
 name: T3 Code
 description: "T3 Code headless server：把编码 Agent（Claude Code、Codex 等）跑在服务器容器里，桌面/网页/手机端连接控制。内置 Setup 页面配对设备、登录 Agent、连接 AI 网关，首次启动自动安装 Agent CLI 与语言工具链。"
 min_os_version: 1.5.0
